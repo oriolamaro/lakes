@@ -1,0 +1,229 @@
+<script src="https://cdn.tiny.cloud/1/na6192bwoalnkxq15j8wmvj3h45wfq8yxguarjbgqz0mmax0/tinymce/5/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: "#content",
+        height: 500,
+        plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+        menubar: 'file edit view insert format tools table help',
+        toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+        toolbar_sticky: true
+    });
+</script>
+
+<script src="https://unpkg.com/feather-icons"></script>
+
+<div id="navbar" class="sticky">
+    <a class="user"><i data-feather="user" class="icon"></i>Welcome, <%= user.name %>!</a>
+    <a class="a" href="/home"><i data-feather="home" class="icon"></i>Home</a>
+    <a class="a" href="/users/logout"><i data-feather="log-out" class="icon"></i>Logout</a>
+</div>
+
+<main>
+    <section class="parallax bg">
+        <div class="headertext">
+            <h1 class="title">Dashboard</h1>
+            <p class="welcome">Welcome admin <%= user.name %></p>
+        </div>
+        <i data-feather="chevron-down" class="arrow"></i>
+    </section>
+
+    <div class="content">
+        <div class="liked">
+            <h2>Liked Posts</h2>
+            <% if (titles.length > 0) { %>
+                <% for (var i = titles.length; i >= 0; i--) { %>
+                    <a href="<%= liked[-(i-titles.length+1)] %>"><%= titles[i] %></a><br>
+                <% } %>
+            <% } else { %>
+                <p class="advice" style="margin-top: 1em;">You haven't liked any posts yet!</p><br>
+            <% } %>
+        </div><br><br><br>
+
+        <h2>Create a post</h2>
+
+        <div class="messages"><%- include ('./partials/messages') %></div>
+
+        <form action="/posts/upload" method="POST">
+            <label for="title">Post Title</label><br>
+            <input name="title" type="text" placeholder="Post Title" size="40" value="<%= typeof title != 'undefined' ? title : '' %>">
+            <p class="advice">*Advice: Title will not be displayed in the post content</p><br>
+
+            <label for="description">Post Description</label><br>
+            <input name="description" type="text" placeholder="Post Description" size="80" value="<%= typeof description != 'undefined' ? description : '' %>"><br><br>
+
+            <label for="image">Post image</label><br>
+            <input name="image" type="url" placeholder="Image URL" size="80" value="<%= typeof image != 'undefined' ? image : '' %>">
+            <p class="advice">*Advice: We recommend to put a landscape proportion image</p><br>
+
+            <div class="editor">
+                <input name="content" id="content"></textarea>
+            </div><br>
+
+            <button type="submit">Create Post!</button><br><br><br>
+        </form><br><br>
+
+    </dic class="content">
+
+</main>
+
+<style>
+    * {
+        margin: 0;
+    }
+    input {
+        margin-left: 8.5em;
+        padding: 1em;
+        border: none;
+        border-radius: 4px;
+        background-color: #E0E4E4;
+        margin-bottom: 1em;
+    }
+    label {
+        margin-left: 8em;
+    }
+    button {
+        margin-top: 1em;
+        border: 0;
+        padding: 1em 2em 1em 2em;
+        background-color: #466975;
+        border-radius: 4px;
+        margin-left: 10em;
+        color:#F6F6F8;
+        font-weight: 600;
+    }
+    a {
+        margin-left: 10em;
+        color: #414C4E;
+        margin-bottom: 15vh;
+    }
+    .editor {
+      margin: 1em 7em 0 7em;
+    }
+    h2{
+        margin-left: 3em;
+        font-size: 2em;
+        color: #414C4E;
+        text-transform: uppercase;
+    }
+    section {
+        transform-style: preserve-3d;
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+    .parallax::after {
+        content: " ";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateZ(-0.5px) scale(1.252);
+        background-size: 100%;
+        z-index: -1;
+    }
+    .bg::after {
+        background: url("https://cdn.wallpapersafari.com/87/92/FScERb.jpg");
+        background-size: cover;
+    }
+    main {
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        perspective: 2px;
+    }
+    .content {
+        margin-top: 45vh;
+        transform: translateZ(-0.5px) scale(1.25);
+    }
+    .title {
+        text-transform: uppercase;
+        color: #323232;
+        font-size: 4.5em;
+    }
+    .welcome {
+        color: #414C4E;
+        font-weight: 600;
+    }
+    .headertext {
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .messages {
+        margin-left: 10em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }    
+    #navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+        padding: 2em;
+        margin: 0.75em;
+        border-radius: 1.5em;
+        background: rgba( 255, 255, 255, 0.25 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 2.5px );
+        -webkit-backdrop-filter: blur( 2.5px );
+        border-radius: 10px;
+    }
+    .a {
+        padding: 1.5em;
+        border-radius: 1em;
+        margin-right: 10em;
+        margin-left: 3em;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: #323232;
+        font-weight: bold;
+    }
+    .a:hover {
+        background: rgba( 245, 245, 245, 0.3 );
+        border-radius: 10px;
+        border: 1px solid rgba( 245, 245, 245, 0.3 );
+    }
+    .icon {
+        margin-right: 0.3em;
+        margin-bottom: -0.25em;
+    }
+    .arrow {
+        margin-top: 44em;
+        transform: translateZ(-0.25px) scale(3.7);
+        animation-name: upndown;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+    }
+    @keyframes upndown {
+        0%   {padding-top: 1em;}
+        16.6%  {padding-top: 0em;}
+        33.6% {padding-top: 1em;}
+        49.8% {padding-top: 0em;}
+        66.4% {padding-top: 1em;}
+        83% {padding-top: 0em;}
+        100% {padding-top: 1em;}
+    }
+    .advice {
+        color: #D3D3D3;
+        margin-left: 8em;
+    }
+    .user {
+        padding: 1.5em;
+        margin-left: -1.25em;
+        margin-right: 3em;
+        border-radius: 5px;
+        background-color: #323232;
+        color: #F6F6F8;
+    }
+</style>
+
+<script>
+    feather.replace()
+</script>

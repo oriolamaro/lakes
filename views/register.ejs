@@ -1,0 +1,157 @@
+<style>
+  * {
+    margin: 0;
+  }
+  input {
+    margin-left: 10em;
+  }
+  label {
+    margin-left: 9em;
+  }
+  h1 {
+    color: #234157;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-transform: uppercase;
+    font-weight: 1000;
+    font-size: 5em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+    margin-top: 0.75em;
+    margin-bottom: 0.25em;
+  }
+  p {
+    margin-left: 8.5em;
+  }
+  .link {
+    margin-left: 10em;
+    color: #414C4E;
+  }
+  input {
+    background-color: #E0E4E4;
+    border: 0;
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 4px;
+  }
+  button {
+    border: 0;
+    padding: 1em 2em 1em 2em;
+    background-color: #466975;
+    border-radius: 4px;
+    margin-left: 10em;
+    color:#F6F6F8;
+    font-weight: 600;
+  }
+  .card {
+    margin: 0;
+    display: flex;
+   flex-wrap: wrap-reverse;
+  }
+  .card > .item {
+    flex: 1 0 35rem;
+  }
+  img {
+    padding: 0;
+  }
+  #navbar {
+        position: fixed;
+        width: auto;
+        z-index: 1;
+        padding: 2em;
+        margin: 1em;
+        border-radius: 1.5em;
+        background: rgba( 255, 255, 255, 0.25 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 2.5px );
+        -webkit-backdrop-filter: blur( 2.5px );
+        border-radius: 10px;
+    }
+    .nav {
+        padding: 1.5em;
+        border-radius: 1em;
+        margin-left: 1em;
+        margin-right: 1em;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: #323232;
+        font-weight: bold;
+    }
+    .nav:hover {
+        background: rgba( 245, 245, 245, 0.3 );
+        border-radius: 10px;
+        border: 1px solid rgba( 245, 245, 245, 0.3 );
+    }
+    .icon {
+        margin-right: 0.3em;
+        margin-bottom: -0.25em;
+    }
+</style>
+
+<div id="navbar">
+  <a class="nav" href="/home"><i data-feather="home" class="icon"></i></a>
+  <a class="nav" href="/users/login"><i data-feather="user-plus" class="icon"></i></a>
+</div>
+
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
+  feather.replace()
+</script>
+
+<div class="card">
+    <div class="item">
+      <img src="https://i.ibb.co/7212PbT/form-Image.jpg"  width="98%" height="auto" >
+    </div>
+    <div class="item">
+      <h1>Register</h1>
+      <div><%- include ('./partials/messages') %></div>
+      <form action="/users/register" method="POST">
+        <div>
+            <label for="name">Name</label><br>
+            <input
+              type="name"
+              name="name"
+              size="50"
+              placeholder="Enter Name"
+              value="<%= typeof name != 'undefined' ? name : '' %>"
+            />
+          
+        </div>
+        <div>
+            <label for="email">Email</label><br>
+            <input
+              type="email"
+              name="email"
+              size="50"
+              placeholder="Enter Email"
+              value="<%= typeof email != 'undefined' ? email : '' %>"
+            />
+          </div>
+          <div >
+            <label for="password">Password</label><br>
+            <input
+              type="password"
+              name="password"
+              size="50"
+              placeholder="Create Password"
+              value="<%= typeof password != 'undefined' ? password : '' %>"
+            />
+          </div>
+          <div>
+            <label for="password2">Confirm Password</label><br>
+            <input
+              type="password"
+              name="password2"
+              size="50"
+              placeholder="Confirm Password"
+              value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+            />
+          </div><br>
+
+          <button type="submit">Register</button>
+
+      </form><br><br>
+
+      <p>Do you have an account? <a class="link" href="/users/login">Login</a></p><br><br>
+    </div>
+</div>

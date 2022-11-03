@@ -1,0 +1,68 @@
+<script src="https://unpkg.com/feather-icons"></script>
+
+<html>
+    <header>
+        <div id="navbar" class="sticky">
+            <a class="a" href="/home"><i data-feather="home" class="icon"></i>Home</a>
+            <a class="a" href="/users/logout"><i data-feather="log-out" class="icon"></i>Logout</a>
+        </div>
+    </header>
+
+    <body>
+        <div class="content">
+            <%- content %>
+        </div>
+    </body>
+</html>
+
+<style>
+    html {
+        background-color: #EEE;
+    }
+    .content {
+        margin: 5em;
+        padding: 2em 4em 4em 3em;
+        background-color: white;
+        border-radius: 1em;
+        box-shadow: 0 7.5px 2px 0 rgba(0,0,0,0.1);
+    }
+    #navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+        padding: 2em;
+        margin: 0.75em;
+        margin-right: -7em;
+        border-radius: 1.5em;
+        background: rgba( 255, 255, 255, 0.25 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 2.5px );
+        -webkit-backdrop-filter: blur( 2.5px );
+        border-radius: 10px;
+    }
+    .a {
+        padding: 1.5em;
+        border-radius: 1em;
+        margin-right: 10em;
+        margin-left: 3em;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: #323232;
+        font-weight: bold;
+    }
+    .a:hover {
+        background: rgba( 245, 245, 245, 0.3 );
+        border-radius: 10px;
+        border: 1px solid rgba( 245, 245, 245, 0.3 );
+    }
+    .icon {
+        margin-right: 0.3em;
+        margin-bottom: -0.25em;
+    }
+</style>
+
+<script>
+    feather.replace()
+</script>
